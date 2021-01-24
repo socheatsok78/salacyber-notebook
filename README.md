@@ -2,6 +2,8 @@
 
 - Session playlist: [SEHE051220][youtube-playlist-url]
 
+## Resources
+
 **Challenge**
 
 - [OverTheWire](https://overthewire.org/)
