@@ -1,0 +1,966 @@
+
+[00;31m#########################################################[00m
+[00;31m#[00m [00;33mLocal Linux Enumeration & Privilege Escalation Script[00m [00;31m#[00m
+[00;31m#########################################################[00m
+[00;33m# www.rebootuser.com[00m
+[00;33m# version 0.982[00m
+
+[-] Debug Info
+[00;33m[+] Thorough tests = Disabled[00m
+
+
+[00;33mScan started at:
+Sun Jan 24 08:56:27 EST 2021
+[00m
+
+[00;33m### SYSTEM ##############################################[00m
+[00;31m[-] Kernel information:[00m
+Linux Quaoar 3.2.0-23-generic-pae #36-Ubuntu SMP Tue Apr 10 22:19:09 UTC 2012 i686 i686 i386 GNU/Linux
+
+
+[00;31m[-] Kernel information (continued):[00m
+Linux version 3.2.0-23-generic-pae (buildd@palmer) (gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu4) ) #36-Ubuntu SMP Tue Apr 10 22:19:09 UTC 2012
+
+
+[00;31m[-] Specific release information:[00m
+DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=12.04
+DISTRIB_CODENAME=precise
+DISTRIB_DESCRIPTION="Ubuntu 12.04 LTS"
+
+
+[00;31m[-] Hostname:[00m
+Quaoar
+
+
+[00;33m### USER/GROUP ##########################################[00m
+[00;31m[-] Current user/group info:[00m
+uid=1001(wpadmin) gid=1001(wpadmin) groups=1001(wpadmin)
+
+
+[00;31m[-] Users that have previously logged onto the system:[00m
+Username         Port     From             Latest
+root             pts/0    10.66.7.1        Sun Jan 24 08:16:23 -0500 2021
+wpadmin          pts/0    36.37.230.13     Sun Jan 24 08:18:37 -0500 2021
+
+
+[00;31m[-] Who else is logged on:[00m
+ 08:56:27 up 40 min,  1 user,  load average: 0.28, 0.16, 0.15
+USER     TTY      FROM              LOGIN@   IDLE   JCPU   PCPU WHAT
+wpadmin  pts/0    36.37.230.13     08:18    2.00s  0.01s  0.00s tail -f /dev/nu
+
+
+[00;31m[-] Group memberships:[00m
+uid=0(root) gid=0(root) groups=0(root)
+uid=1(daemon) gid=1(daemon) groups=1(daemon)
+uid=2(bin) gid=2(bin) groups=2(bin)
+uid=3(sys) gid=3(sys) groups=3(sys)
+uid=4(sync) gid=65534(nogroup) groups=65534(nogroup)
+uid=5(games) gid=60(games) groups=60(games)
+uid=6(man) gid=12(man) groups=12(man)
+uid=7(lp) gid=7(lp) groups=7(lp)
+uid=8(mail) gid=8(mail) groups=8(mail)
+uid=9(news) gid=9(news) groups=9(news)
+uid=10(uucp) gid=10(uucp) groups=10(uucp)
+uid=13(proxy) gid=13(proxy) groups=13(proxy)
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+uid=34(backup) gid=34(backup) groups=34(backup)
+uid=38(list) gid=38(list) groups=38(list)
+uid=39(irc) gid=39(irc) groups=39(irc)
+uid=41(gnats) gid=41(gnats) groups=41(gnats)
+uid=65534(nobody) gid=65534(nogroup) groups=65534(nogroup)
+uid=100(libuuid) gid=101(libuuid) groups=101(libuuid)
+uid=101(syslog) gid=103(syslog) groups=103(syslog)
+uid=102(mysql) gid=105(mysql) groups=105(mysql)
+uid=103(messagebus) gid=107(messagebus) groups=107(messagebus)
+uid=104(colord) gid=109(colord) groups=109(colord)
+uid=105(whoopsie) gid=112(whoopsie) groups=112(whoopsie)
+uid=106(avahi) gid=115(avahi) groups=115(avahi)
+uid=107(bind) gid=117(bind) groups=117(bind)
+uid=108(postfix) gid=118(postfix) groups=118(postfix)
+uid=109(dovecot) gid=120(dovecot) groups=120(dovecot)
+uid=110(dovenull) gid=65534(nogroup) groups=65534(nogroup)
+uid=111(landscape) gid=121(landscape) groups=121(landscape)
+uid=112(libvirt-qemu) gid=106(kvm) groups=106(kvm)
+uid=113(libvirt-dnsmasq) gid=123(libvirtd) groups=123(libvirtd)
+uid=114(sshd) gid=65534(nogroup) groups=65534(nogroup)
+uid=115(postgres) gid=124(postgres) groups=124(postgres),111(ssl-cert)
+uid=116(tomcat6) gid=126(tomcat6) groups=126(tomcat6)
+uid=1001(wpadmin) gid=1001(wpadmin) groups=1001(wpadmin)
+
+
+[00;31m[-] Contents of /etc/passwd:[00m
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/bin/sh
+bin:x:2:2:bin:/bin:/bin/sh
+sys:x:3:3:sys:/dev:/bin/sh
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/bin/sh
+man:x:6:12:man:/var/cache/man:/bin/sh
+lp:x:7:7:lp:/var/spool/lpd:/bin/sh
+mail:x:8:8:mail:/var/mail:/bin/sh
+news:x:9:9:news:/var/spool/news:/bin/sh
+uucp:x:10:10:uucp:/var/spool/uucp:/bin/sh
+proxy:x:13:13:proxy:/bin:/bin/sh
+www-data:x:33:33:www-data:/var/www:/bin/sh
+backup:x:34:34:backup:/var/backups:/bin/sh
+list:x:38:38:Mailing List Manager:/var/list:/bin/sh
+irc:x:39:39:ircd:/var/run/ircd:/bin/sh
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/bin/sh
+nobody:x:65534:65534:nobody:/nonexistent:/bin/sh
+libuuid:x:100:101::/var/lib/libuuid:/bin/sh
+syslog:x:101:103::/home/syslog:/bin/false
+mysql:x:102:105:MySQL Server,,,:/nonexistent:/bin/false
+messagebus:x:103:107::/var/run/dbus:/bin/false
+colord:x:104:109:colord colour management daemon,,,:/var/lib/colord:/bin/false
+whoopsie:x:105:112::/nonexistent:/bin/false
+avahi:x:106:115:Avahi mDNS daemon,,,:/var/run/avahi-daemon:/bin/false
+bind:x:107:117::/var/cache/bind:/bin/false
+postfix:x:108:118::/var/spool/postfix:/bin/false
+dovecot:x:109:120:Dovecot mail server,,,:/usr/lib/dovecot:/bin/false
+dovenull:x:110:65534:Dovecot login user,,,:/nonexistent:/bin/false
+landscape:x:111:121::/var/lib/landscape:/bin/false
+libvirt-qemu:x:112:106:Libvirt Qemu,,,:/var/lib/libvirt:/bin/false
+libvirt-dnsmasq:x:113:123:Libvirt Dnsmasq,,,:/var/lib/libvirt/dnsmasq:/bin/false
+sshd:x:114:65534::/var/run/sshd:/usr/sbin/nologin
+postgres:x:115:124:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash
+tomcat6:x:116:126::/usr/share/tomcat6:/bin/false
+wpadmin:x:1001:1001::/home/wpadmin:/bin/sh
+
+
+[00;33m[+] We can read the shadow file![00m
+root:$1$WmyYk375$JrvslqbphbvmPArXslKds.:17111:0:99999:7:::
+daemon:*:17081:0:99999:7:::
+bin:*:17081:0:99999:7:::
+sys:*:17081:0:99999:7:::
+sync:*:17081:0:99999:7:::
+games:*:17081:0:99999:7:::
+man:*:17081:0:99999:7:::
+lp:*:17081:0:99999:7:::
+mail:*:17081:0:99999:7:::
+news:*:17081:0:99999:7:::
+uucp:*:17081:0:99999:7:::
+proxy:*:17081:0:99999:7:::
+www-data:*:17081:0:99999:7:::
+backup:*:17081:0:99999:7:::
+list:*:17081:0:99999:7:::
+irc:*:17081:0:99999:7:::
+gnats:*:17081:0:99999:7:::
+nobody:*:17081:0:99999:7:::
+libuuid:!:17081:0:99999:7:::
+syslog:*:17081:0:99999:7:::
+mysql:!:17081:0:99999:7:::
+messagebus:*:17081:0:99999:7:::
+colord:*:17081:0:99999:7:::
+whoopsie:*:17081:0:99999:7:::
+avahi:*:17081:0:99999:7:::
+bind:*:17081:0:99999:7:::
+postfix:*:17081:0:99999:7:::
+dovecot:*:17081:0:99999:7:::
+dovenull:*:17081:0:99999:7:::
+landscape:*:17081:0:99999:7:::
+libvirt-qemu:!:17081:0:99999:7:::
+libvirt-dnsmasq:!:17081:0:99999:7:::
+sshd:*:17081:0:99999:7:::
+postgres:*:17081:0:99999:7:::
+tomcat6:*:17081:0:99999:7:::
+wpadmin:$6$FtTN/YPC$iidNFmRVpQ1p2kkfoOZ6OzNPqR95DQ/7G10aze2CA2W3ik/sHHyEPaNNY57tMvRDU0/Rs62FEimiKXD2VgEYC1:17096:0:99999:7:::
+
+
+[00;31m[-] Super user account(s):[00m
+root
+
+
+[00;31m[-] Are permissions on /home directories lax:[00m
+total 12K
+drwxr-xr-x  3 root root 4.0K Oct 24  2016 .
+drwxr-xr-x 22 root root 4.0K Jan 24 08:16 ..
+drwxr-xr-x  2 root root 4.0K Oct 22  2016 wpadmin
+
+
+[00;31m[-] Root is allowed to login via SSH:[00m
+PermitRootLogin yes
+
+
+[00;33m### ENVIRONMENTAL #######################################[00m
+[00;31m[-] Environment information:[00m
+XDG_SESSION_COOKIE=184b159199b5f40556a078e40000012c-1611494317.15263-1856506665
+SSH_CLIENT=36.37.230.13 50131 22
+SSH_TTY=/dev/pts/0
+USER=wpadmin
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+MAIL=/var/mail/wpadmin
+PWD=/tmp
+LANG=en_US.UTF-8
+SHLVL=1
+HOME=/home/wpadmin
+LOGNAME=wpadmin
+SSH_CONNECTION=36.37.230.13 50131 10.66.7.100 22
+_=/usr/bin/env
+
+
+[00;31m[-] Path information:[00m
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+drwxr-xr-x 2 root root  4096 Oct  7  2016 /bin
+drwxr-xr-x 2 root root  4096 Oct 28  2016 /sbin
+drwxr-xr-x 2 root root 20480 Oct 28  2016 /usr/bin
+drwxr-xr-x 2 root root  4096 Apr 19  2012 /usr/games
+drwxr-xr-x 2 root root  4096 Nov 13  2016 /usr/local/bin
+drwxr-xr-x 2 root root  4096 Oct  7  2016 /usr/local/sbin
+drwxr-xr-x 2 root root 12288 Oct 28  2016 /usr/sbin
+
+
+[00;31m[-] Available shells:[00m
+# /etc/shells: valid login shells
+/bin/sh
+/bin/dash
+/bin/bash
+/bin/rbash
+/usr/bin/tmux
+/usr/bin/screen
+
+
+[00;31m[-] Current umask value:[00m
+0002
+u=rwx,g=rwx,o=rx
+
+
+[00;31m[-] umask value as specified in /etc/login.defs:[00m
+UMASK		022
+
+
+[00;31m[-] Password and storage information:[00m
+PASS_MAX_DAYS	99999
+PASS_MIN_DAYS	0
+PASS_WARN_AGE	7
+ENCRYPT_METHOD SHA512
+
+
+[00;33m### JOBS/TASKS ##########################################[00m
+[00;31m[-] Cron jobs:[00m
+-rw-r--r-- 1 root root  722 Apr  2  2012 /etc/crontab
+
+/etc/cron.d:
+total 16
+drwxr-xr-x   2 root root 4096 Oct  7  2016 .
+drwxr-xr-x 117 root root 4096 Jan 24 08:16 ..
+-rw-r--r--   1 root root  686 Oct 29  2016 php5
+-rw-r--r--   1 root root  102 Apr  2  2012 .placeholder
+
+/etc/cron.daily:
+total 88
+drwxr-xr-x   2 root root  4096 Oct  7  2016 .
+drwxr-xr-x 117 root root  4096 Jan 24 08:16 ..
+-rwxr-xr-x   1 root root   633 Feb 12  2012 apache2
+-rwxr-xr-x   1 root root   219 Apr 10  2012 apport
+-rwxr-xr-x   1 root root 15399 Apr 20  2012 apt
+-rwxr-xr-x   1 root root   314 Mar 30  2012 aptitude
+-rwxr-xr-x   1 root root   502 Mar 31  2012 bsdmainutils
+-rwxr-xr-x   1 root root   256 Apr 12  2012 dpkg
+-rwxr-xr-x   1 root root  1029 Apr 16  2012 libvirt-bin
+-rwxr-xr-x   1 root root   372 Oct  4  2011 logrotate
+-rwxr-xr-x   1 root root  1365 Mar 31  2012 man-db
+-rwxr-xr-x   1 root root   606 Aug 17  2011 mlocate
+-rwxr-xr-x   1 root root   249 Apr  8  2012 passwd
+-rw-r--r--   1 root root   102 Apr  2  2012 .placeholder
+-rwxr-xr-x   1 root root  2417 Jul  1  2011 popularity-contest
+-rwxr-xr-x   1 root root   383 Apr 12  2012 samba
+-rwxr-xr-x   1 root root  2947 Apr  2  2012 standard
+-rwxr-xr-x   1 root root   477 Apr 11  2012 tomcat6
+-rwxr-xr-x   1 root root   214 Apr 20  2012 update-notifier-common
+
+/etc/cron.hourly:
+total 12
+drwxr-xr-x   2 root root 4096 Oct  7  2016 .
+drwxr-xr-x 117 root root 4096 Jan 24 08:16 ..
+-rw-r--r--   1 root root  102 Apr  2  2012 .placeholder
+
+/etc/cron.monthly:
+total 12
+drwxr-xr-x   2 root root 4096 Oct  7  2016 .
+drwxr-xr-x 117 root root 4096 Jan 24 08:16 ..
+-rw-r--r--   1 root root  102 Apr  2  2012 .placeholder
+
+/etc/cron.weekly:
+total 20
+drwxr-xr-x   2 root root 4096 Oct  7  2016 .
+drwxr-xr-x 117 root root 4096 Jan 24 08:16 ..
+-rwxr-xr-x   1 root root  730 Dec 30  2011 apt-xapian-index
+-rwxr-xr-x   1 root root  907 Mar 31  2012 man-db
+-rw-r--r--   1 root root  102 Apr  2  2012 .placeholder
+
+
+[00;31m[-] Crontab contents:[00m
+# /etc/crontab: system-wide crontab
+# Unlike any other crontab you don't have to run the `crontab'
+# command to install the new version when you edit this file
+# and files in /etc/cron.d. These files also have username fields,
+# that none of the other crontabs do.
+
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# m h dom mon dow user	command
+17 *	* * *	root    cd / && run-parts --report /etc/cron.hourly
+25 6	* * *	root	test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.daily )
+47 6	* * 7	root	test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
+52 6	1 * *	root	test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
+#
+
+
+[00;33m### NETWORKING  ##########################################[00m
+[00;31m[-] Network and IP info:[00m
+eth0      Link encap:Ethernet  HWaddr 00:00:00:00:00:07  
+          inet addr:10.66.7.100  Bcast:10.66.7.255  Mask:255.255.255.0
+          inet6 addr: fe80::200:ff:fe00:7/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:8072 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:6776 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:1111409 (1.1 MB)  TX bytes:36078798 (36.0 MB)
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+          RX packets:717 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:717 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:131901 (131.9 KB)  TX bytes:131901 (131.9 KB)
+
+virbr0    Link encap:Ethernet  HWaddr 42:ff:14:0f:c1:ef  
+          inet addr:192.168.122.1  Bcast:192.168.122.255  Mask:255.255.255.0
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+
+[00;31m[-] ARP history:[00m
+? (10.66.7.1) at 00:0c:29:f6:66:07 [ether] on eth0
+
+
+[00;31m[-] Nameserver(s):[00m
+nameserver 8.8.8.8
+
+
+[00;31m[-] Default route:[00m
+default         10.66.7.1       0.0.0.0         UG    100    0        0 eth0
+
+
+[00;31m[-] Listening TCP:[00m
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+tcp        0      0 127.0.0.1:3306          0.0.0.0:*               LISTEN      -               
+tcp        0      0 0.0.0.0:139             0.0.0.0:*               LISTEN      -               
+tcp        0      0 0.0.0.0:110             0.0.0.0:*               LISTEN      -               
+tcp        0      0 0.0.0.0:143             0.0.0.0:*               LISTEN      -               
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      -               
+tcp        0      0 192.168.122.1:53        0.0.0.0:*               LISTEN      -               
+tcp        0      0 10.66.7.100:53          0.0.0.0:*               LISTEN      -               
+tcp        0      0 127.0.0.1:53            0.0.0.0:*               LISTEN      -               
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -               
+tcp        0      0 127.0.0.1:631           0.0.0.0:*               LISTEN      -               
+tcp        0      0 127.0.0.1:5432          0.0.0.0:*               LISTEN      -               
+tcp        0      0 127.0.0.1:953           0.0.0.0:*               LISTEN      -               
+tcp        0      0 0.0.0.0:445             0.0.0.0:*               LISTEN      -               
+tcp        0      0 0.0.0.0:993             0.0.0.0:*               LISTEN      -               
+tcp        0      0 0.0.0.0:995             0.0.0.0:*               LISTEN      -               
+tcp6       0      0 :::110                  :::*                    LISTEN      -               
+tcp6       0      0 :::143                  :::*                    LISTEN      -               
+tcp6       0      0 :::53                   :::*                    LISTEN      -               
+tcp6       0      0 :::22                   :::*                    LISTEN      -               
+tcp6       0      0 ::1:631                 :::*                    LISTEN      -               
+tcp6       0      0 ::1:953                 :::*                    LISTEN      -               
+tcp6       0      0 :::993                  :::*                    LISTEN      -               
+tcp6       0      0 :::995                  :::*                    LISTEN      -               
+
+
+[00;31m[-] Listening UDP:[00m
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
+udp        0      0 192.168.122.255:137     0.0.0.0:*                           -               
+udp        0      0 192.168.122.1:137       0.0.0.0:*                           -               
+udp        0      0 10.66.7.255:137         0.0.0.0:*                           -               
+udp        0      0 10.66.7.100:137         0.0.0.0:*                           -               
+udp        0      0 0.0.0.0:137             0.0.0.0:*                           -               
+udp        0      0 192.168.122.255:138     0.0.0.0:*                           -               
+udp        0      0 192.168.122.1:138       0.0.0.0:*                           -               
+udp        0      0 10.66.7.255:138         0.0.0.0:*                           -               
+udp        0      0 10.66.7.100:138         0.0.0.0:*                           -               
+udp        0      0 0.0.0.0:138             0.0.0.0:*                           -               
+udp        0      0 0.0.0.0:5353            0.0.0.0:*                           -               
+udp        0      0 0.0.0.0:36824           0.0.0.0:*                           -               
+udp        0      0 192.168.122.1:53        0.0.0.0:*                           -               
+udp        0      0 10.66.7.100:53          0.0.0.0:*                           -               
+udp        0      0 127.0.0.1:53            0.0.0.0:*                           -               
+udp        0      0 0.0.0.0:67              0.0.0.0:*                           -               
+udp        0      0 0.0.0.0:68              0.0.0.0:*                           -               
+udp6       0      0 :::5353                 :::*                                -               
+udp6       0      0 :::53                   :::*                                -               
+udp6       0      0 :::33910                :::*                                -               
+
+
+[00;33m### SERVICES #############################################[00m
+[00;31m[-] Running processes:[00m
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.0   3520  1960 ?        Ss   08:16   0:00 /sbin/init
+root         2  0.0  0.0      0     0 ?        S    08:16   0:00 [kthreadd]
+root         3  0.0  0.0      0     0 ?        S    08:16   0:00 [ksoftirqd/0]
+root         4  0.0  0.0      0     0 ?        S    08:16   0:00 [kworker/0:0]
+root         5  0.0  0.0      0     0 ?        S    08:16   0:00 [kworker/u:0]
+root         6  0.0  0.0      0     0 ?        S    08:16   0:00 [migration/0]
+root         7  0.0  0.0      0     0 ?        S    08:16   0:00 [watchdog/0]
+root         8  0.0  0.0      0     0 ?        S    08:16   0:00 [migration/1]
+root         9  0.0  0.0      0     0 ?        S    08:16   0:00 [kworker/1:0]
+root        10  0.0  0.0      0     0 ?        S    08:16   0:00 [ksoftirqd/1]
+root        12  0.0  0.0      0     0 ?        S    08:16   0:00 [watchdog/1]
+root        13  0.0  0.0      0     0 ?        S<   08:16   0:00 [cpuset]
+root        14  0.0  0.0      0     0 ?        S<   08:16   0:00 [khelper]
+root        15  0.0  0.0      0     0 ?        S    08:16   0:00 [kdevtmpfs]
+root        16  0.0  0.0      0     0 ?        S<   08:16   0:00 [netns]
+root        17  0.0  0.0      0     0 ?        S    08:16   0:00 [kworker/u:1]
+root        18  0.0  0.0      0     0 ?        S    08:16   0:00 [sync_supers]
+root        19  0.0  0.0      0     0 ?        S    08:16   0:00 [bdi-default]
+root        20  0.0  0.0      0     0 ?        S<   08:16   0:00 [kintegrityd]
+root        21  0.0  0.0      0     0 ?        S<   08:16   0:00 [kblockd]
+root        22  0.0  0.0      0     0 ?        S<   08:16   0:00 [ata_sff]
+root        23  0.0  0.0      0     0 ?        S    08:16   0:00 [khubd]
+root        24  0.0  0.0      0     0 ?        S<   08:16   0:00 [md]
+root        26  0.0  0.0      0     0 ?        S    08:16   0:00 [khungtaskd]
+root        27  0.0  0.0      0     0 ?        S    08:16   0:00 [kswapd0]
+root        28  0.0  0.0      0     0 ?        SN   08:16   0:00 [ksmd]
+root        29  0.0  0.0      0     0 ?        SN   08:16   0:00 [khugepaged]
+root        30  0.0  0.0      0     0 ?        S    08:16   0:00 [fsnotify_mark]
+root        31  0.0  0.0      0     0 ?        S    08:16   0:00 [ecryptfs-kthrea]
+root        32  0.0  0.0      0     0 ?        S<   08:16   0:00 [crypto]
+root        40  0.0  0.0      0     0 ?        S<   08:16   0:00 [kthrotld]
+root        41  0.0  0.0      0     0 ?        S    08:16   0:00 [scsi_eh_0]
+root        42  0.0  0.0      0     0 ?        S    08:16   0:00 [scsi_eh_1]
+root        63  0.0  0.0      0     0 ?        S<   08:16   0:00 [devfreq_wq]
+root       197  0.0  0.0      0     0 ?        S<   08:16   0:00 [mpt_poll_0]
+root       200  0.0  0.0      0     0 ?        S<   08:16   0:00 [mpt/0]
+root       233  0.0  0.0      0     0 ?        S    08:16   0:00 [scsi_eh_2]
+root       235  0.0  0.0      0     0 ?        S    08:16   0:00 [kworker/1:1]
+root       246  0.0  0.0      0     0 ?        S<   08:16   0:00 [kdmflush]
+root       258  0.0  0.0      0     0 ?        S<   08:16   0:00 [kdmflush]
+root       267  0.0  0.0      0     0 ?        S    08:16   0:00 [jbd2/dm-0-8]
+root       268  0.0  0.0      0     0 ?        S<   08:16   0:00 [ext4-dio-unwrit]
+root       472  0.0  0.0   2816   604 ?        S    08:16   0:00 upstart-udev-bridge --daemon
+root       476  0.0  0.0   3284  1504 ?        Ss   08:16   0:00 /sbin/udevd --daemon
+root       562  0.0  0.0   3188  1000 ?        S    08:16   0:00 /sbin/udevd --daemon
+root       571  0.0  0.0   3188  1000 ?        S    08:16   0:00 /sbin/udevd --daemon
+root       628  0.0  0.0      0     0 ?        S<   08:16   0:00 [kpsmoused]
+root       629  0.0  0.0      0     0 ?        S    08:16   0:01 [kworker/0:2]
+root       734  0.0  0.0   2828   344 ?        S    08:16   0:00 upstart-socket-bridge --daemon
+root       869  0.0  0.1  21492  4904 ?        Ss   08:16   0:00 smbd -F
+103        916  0.0  0.0   3380  1136 ?        Ss   08:16   0:00 dbus-daemon --system --fork --activation=upstart
+root       939  0.0  0.0  10852  3384 ?        Ss   08:16   0:00 /usr/sbin/cupsd -F
+syslog     941  0.0  0.0  31184  1472 ?        Sl   08:16   0:00 rsyslogd -c5
+avahi      943  0.0  0.0   3592  1608 ?        S    08:16   0:00 avahi-daemon: running [Quaoar.local]
+avahi      945  0.0  0.0   3436   432 ?        S    08:16   0:00 avahi-daemon: chroot helper
+root       948  0.0  0.0  21492  1364 ?        S    08:16   0:00 smbd -F
+root       955  0.0  0.0   2908   652 ?        Ss   08:16   0:00 dhclient3 -e IF_METRIC=100 -pf /var/run/dhclient.eth0.pid -lf /var/lib/dhcp/dhclient.eth0.leases -1 eth0
+root      1002  0.0  0.0   6664  2404 ?        Ss   08:16   0:00 /usr/sbin/sshd -D
+root      1036  0.0  0.0  13312  1812 ?        Ss   08:16   0:00 nmbd -D
+root      1127  0.0  0.0   4612   844 tty4     Ss+  08:16   0:00 /sbin/getty -8 38400 tty4
+root      1141  0.0  0.0   4612   848 tty5     Ss+  08:16   0:00 /sbin/getty -8 38400 tty5
+root      1151  0.0  0.0   4612   844 tty2     Ss+  08:16   0:00 /sbin/getty -8 38400 tty2
+root      1152  0.0  0.0   4612   836 tty3     Ss+  08:16   0:00 /sbin/getty -8 38400 tty3
+root      1156  0.0  0.0   4612   840 tty6     Ss+  08:16   0:00 /sbin/getty -8 38400 tty6
+root      1160  0.0  0.0   2992  1136 ?        Ss   08:16   0:00 /usr/sbin/dovecot -F -c /etc/dovecot/dovecot.conf
+root      1162  0.0  0.0   2156   604 ?        Ss   08:16   0:00 acpid -c /etc/acpi/events -s /var/run/acpid.socket
+root      1164  0.0  0.0   2600   876 ?        Ss   08:16   0:00 cron
+daemon    1165  0.0  0.0   2452   348 ?        Ss   08:16   0:00 atd
+bind      1176  0.0  0.2  52032 10644 ?        Ssl  08:16   0:00 /usr/sbin/named -u bind
+mysql     1194  0.0  1.0 328496 41512 ?        Ssl  08:16   0:00 /usr/sbin/mysqld
+root      1208  0.0  0.0   3584   636 ?        Ss   08:16   0:00 /usr/sbin/irqbalance
+dovecot   1222  0.0  0.0   2704   836 ?        S    08:16   0:00 dovecot/anvil
+root      1224  0.0  0.0   2700   932 ?        S    08:16   0:00 dovecot/log
+whoopsie  1228  0.0  0.0  24460  3796 ?        Ssl  08:16   0:00 whoopsie
+root      1236  0.0  0.1 105356  5052 ?        Sl   08:16   0:00 /usr/sbin/libvirtd -d
+root      1249  0.0  0.0   5088  3068 ?        S    08:16   0:00 dovecot/config
+root      1342  0.0  0.0      0     0 ?        S    08:16   0:00 [flush-252:0]
+postgres  1344  0.0  0.1  50200  7784 ?        S    08:16   0:00 /usr/lib/postgresql/9.1/bin/postgres -D /var/lib/postgresql/9.1/main -c config_file=/etc/postgresql/9.1/main/postgresql.conf
+113       1517  0.0  0.0   3336   880 ?        S    08:16   0:00 /usr/sbin/dnsmasq -u libvirt-dnsmasq --strict-order --bind-interfaces --pid-file=/var/run/libvirt/network/default.pid --conf-file= --except-interface lo --listen-address 192.168.122.1 --dhcp-range 192.168.122.2,192.168.122.254 --dhcp-leasefile=/var/lib/libvirt/dnsmasq/default.leases --dhcp-lease-max=253 --dhcp-no-override
+root      1520  0.0  0.1  38888  5620 ?        Sl   08:16   0:01 /usr/sbin/vmtoolsd
+root      1547  0.0  0.1  23728  7896 ?        S    08:16   0:00 /usr/lib/vmware-vgauth/VGAuthService -s
+postgres  1587  0.0  0.0  50200  1488 ?        Ss   08:16   0:00 postgres: writer process                                                                                                    
+postgres  1588  0.0  0.0  50200  1252 ?        Ss   08:16   0:00 postgres: wal writer process                                                                                                
+postgres  1589  0.0  0.0  50620  2376 ?        Ss   08:16   0:00 postgres: autovacuum launcher process                                                                                       
+postgres  1590  0.0  0.0  20392  1312 ?        Ss   08:16   0:00 postgres: stats collector process                                                                                           
+root      1723  0.0  0.0  17992  2648 ?        Ss   08:16   0:00 /usr/sbin/winbindd
+root      1735  0.0  0.0  17984  1336 ?        S    08:16   0:00 /usr/sbin/winbindd
+root      1763  0.0  0.1  34060  7100 ?        Ss   08:16   0:00 /usr/sbin/apache2 -k start
+root      1780  0.0  0.0  17984  1088 ?        S    08:16   0:00 /usr/sbin/winbindd
+root      1782  0.0  0.0  30208  3432 ?        Sl   08:16   0:00 /usr/sbin/console-kit-daemon --no-daemon
+root      1851  0.0  0.0  24564  2812 ?        Sl   08:16   0:00 /usr/lib/policykit-1/polkitd --no-debug
+www-data  1859  0.0  0.5  48356 21652 ?        S    08:16   0:01 /usr/sbin/apache2 -k start
+www-data  1860  0.0  0.6  52308 25612 ?        S    08:16   0:01 /usr/sbin/apache2 -k start
+www-data  1861  0.0  0.5  51464 24456 ?        S    08:16   0:00 /usr/sbin/apache2 -k start
+www-data  1862  0.0  0.5  51464 24484 ?        S    08:16   0:00 /usr/sbin/apache2 -k start
+www-data  1863  0.0  0.5  48612 21892 ?        S    08:16   0:00 /usr/sbin/apache2 -k start
+root      1870  0.0  0.0   4612   840 tty1     Ss+  08:16   0:00 /sbin/getty -8 38400 tty1
+root      2053  0.0  0.1  17808  5348 ?        Ss   08:18   0:00 sshd: wpadmin [priv]
+wpadmin   2166  0.0  0.0  17808  1904 ?        S    08:18   0:00 sshd: wpadmin@pts/0 
+wpadmin   2167  0.0  0.0   2216   600 pts/0    Ss   08:18   0:00 -sh
+www-data  2188  0.0  0.6  52024 25232 ?        S    08:19   0:01 /usr/sbin/apache2 -k start
+www-data  2192  0.0  0.6  53280 26512 ?        S    08:19   0:01 /usr/sbin/apache2 -k start
+www-data  2193  0.0  0.7  54864 29212 ?        S    08:19   0:01 /usr/sbin/apache2 -k start
+www-data  2194  0.0  0.6  54368 28092 ?        S    08:19   0:01 /usr/sbin/apache2 -k start
+www-data  2218  0.0  0.5  51192 24236 ?        S    08:21   0:00 /usr/sbin/apache2 -k start
+www-data  2388  0.0  0.0   2216   540 ?        S    08:33   0:00 sh -c uname -a; w; id; /bin/sh -i
+www-data  2392  0.0  0.0   2216   540 ?        S    08:33   0:00 /bin/sh -i
+www-data  2400  0.0  0.1   9088  4244 ?        S    08:34   0:00 python -c import pty; pty.spawn("/bin/sh")
+www-data  2401  0.0  0.0   2216   548 pts/2    Ss   08:34   0:00 /bin/sh
+www-data  2428  0.0  0.0   6256  2416 pts/2    S+   08:36   0:00 ssh root@127.0.0.1
+www-data  2672  0.0  0.0   2216   540 ?        S    08:49   0:00 sh -c uname -a; w; id; /bin/sh -i
+www-data  2676  0.0  0.0   2216   544 ?        S    08:49   0:00 /bin/sh -i
+www-data  2700  0.0  0.1   9088  4240 ?        S    08:51   0:00 python -c import pty; pty.spawn("/bin/sh")
+www-data  2701  0.0  0.0   2216   544 pts/1    Ss   08:51   0:00 /bin/sh
+root      2705  0.0  0.0  11004  3016 pts/1    S+   08:51   0:00 sudo - root
+daemon    3327  0.0  0.0  10860  2524 ?        S    08:55   0:00 atd
+wpadmin   3328  0.0  0.0   4216   544 pts/0    S+   08:55   0:00 tail -f /dev/null
+wpadmin   3329  0.0  0.0   2216   544 ?        SN   08:55   0:00 sh
+wpadmin   3330  0.0  0.0   2216   544 ?        SN   08:55   0:00 /bin/sh
+wpadmin   3334  0.0  0.1  11132  4272 ?        SN   08:55   0:00 python -c import pty; pty.spawn("/bin/sh")
+wpadmin   3335  0.0  0.0   2216   540 pts/3    SNs  08:55   0:00 /bin/sh
+wpadmin   3551  0.0  0.0   5852  1904 pts/3    SN+  08:56   0:00 /bin/bash ./LinEnum.sh
+wpadmin   3552  0.0  0.0   4188   592 pts/3    SN+  08:56   0:00 tee LinEnum.log
+wpadmin   3553  0.1  0.0   5920  1400 pts/3    SN+  08:56   0:00 /bin/bash ./LinEnum.sh
+wpadmin   3554  0.0  0.0   4188   588 pts/3    SN+  08:56   0:00 tee -a
+wpadmin   3759  0.0  0.0   5920  1120 pts/3    SN+  08:56   0:00 /bin/bash ./LinEnum.sh
+wpadmin   3760  0.0  0.0   4924  1160 pts/3    RN+  08:56   0:00 ps aux
+
+
+[00;31m[-] Process binaries and associated permissions (from above list):[00m
+900K -rwxr-xr-x 1 root root 900K Apr  3  2012 /bin/bash
+   0 lrwxrwxrwx 1 root root    4 Mar 29  2012 /bin/sh -> dash
+ 28K -rwxr-xr-x 2 root root  27K Mar 30  2012 /sbin/getty
+192K -rwxr-xr-x 1 root root 190K Apr 16  2012 /sbin/init
+176K -rwxr-xr-x 1 root root 174K Apr  5  2012 /sbin/udevd
+ 12K -rwxr-xr-x 1 root root 9.7K Jan  6  2012 /usr/lib/policykit-1/polkitd
+5.3M -rwxr-xr-x 1 root root 5.3M Mar  6  2012 /usr/lib/postgresql/9.1/bin/postgres
+   0 lrwxrwxrwx 1 root root   37 Oct 28  2016 /usr/lib/vmware-vgauth/VGAuthService -> /usr/lib/vmware-tools/bin32/appLoader
+   0 lrwxrwxrwx 1 root root   34 Feb 12  2012 /usr/sbin/apache2 -> ../lib/apache2/mpm-prefork/apache2
+140K -rwxr-xr-x 1 root root 139K Feb 25  2012 /usr/sbin/console-kit-daemon
+448K -rwxr-xr-x 1 root root 448K Apr 10  2012 /usr/sbin/cupsd
+188K -rwxr-xr-x 1 root root 185K Dec 12  2011 /usr/sbin/dnsmasq
+ 64K -rwxr-xr-x 1 root root  62K Apr  7  2012 /usr/sbin/dovecot
+ 28K -rwxr-xr-x 1 root root  26K Feb  4  2012 /usr/sbin/irqbalance
+1.3M -rwxr-xr-x 1 root root 1.3M Apr 16  2012 /usr/sbin/libvirtd
+ 10M -rwxr-xr-x 1 root root  10M Mar 29  2012 /usr/sbin/mysqld
+512K -rwxr-xr-x 1 root root 512K Apr 13  2012 /usr/sbin/named
+516K -rwxr-xr-x 1 root root 516K Apr  2  2012 /usr/sbin/sshd
+   0 lrwxrwxrwx 1 root root   37 Oct 28  2016 /usr/sbin/vmtoolsd -> /usr/lib/vmware-tools/sbin32/vmtoolsd
+7.6M -rwxr-xr-x 1 root root 7.6M Apr 12  2012 /usr/sbin/winbindd
+
+
+[00;31m[-] /etc/init.d/ binary permissions:[00m
+total 184
+drwxr-xr-x   2 root root 4096 Oct  7  2016 .
+drwxr-xr-x 117 root root 4096 Jan 24 08:16 ..
+lrwxrwxrwx   1 root root   21 Dec  8  2011 acpid -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root 7621 Feb  6  2012 apache2
+-rwxr-xr-x   1 root root 4596 Apr 12  2012 apparmor
+lrwxrwxrwx   1 root root   21 Apr 18  2012 apport -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Oct 25  2011 atd -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Dec 17  2011 avahi-daemon -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root 3449 Apr 13  2012 bind9
+-rwxr-xr-x   1 root root 2444 Apr 14  2012 bootlogd
+lrwxrwxrwx   1 root root   21 Feb  9  2012 cgroup-lite -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr 19  2012 console-setup -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr  2  2012 cron -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr 10  2012 cups -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Feb 22  2012 dbus -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Mar 30  2012 dmesg -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root 1242 Dec 13  2011 dns-clean
+lrwxrwxrwx   1 root root   21 Apr  7  2012 dovecot -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root 4349 May  7  2010 ebtables
+lrwxrwxrwx   1 root root   21 Mar 14  2012 friendly-recovery -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root 1105 Dec 15  2015 grub-common
+-rwxr-xr-x   1 root root 1329 Apr 14  2012 halt
+lrwxrwxrwx   1 root root   21 May 26  2011 hostname -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Mar 30  2012 hwclock -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Mar 30  2012 hwclock-save -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Feb  4  2012 irqbalance -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root 1293 Apr 14  2012 killprocs
+-rw-r--r--   1 root root    0 Oct  7  2016 .legacy-bootordering
+lrwxrwxrwx   1 root root   21 Apr 16  2012 libvirt-bin -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Nov 20  2011 module-init-tools -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Mar 29  2012 mysql -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root 2797 Feb 13  2012 networking
+lrwxrwxrwx   1 root root   21 Apr  4  2012 network-interface -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr  4  2012 network-interface-container -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr  4  2012 network-interface-security -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr 12  2012 nmbd -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root  882 Apr 14  2012 ondemand
+lrwxrwxrwx   1 root root   21 Apr 13  2012 plymouth -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr 13  2012 plymouth-log -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr 13  2012 plymouth-splash -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr 13  2012 plymouth-stop -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr 13  2012 plymouth-upstart-bridge -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root 7348 Apr 13  2012 postfix
+-rwxr-xr-x   1 root root 1095 Aug  4  2011 postgresql
+-rwxr-xr-x   1 root root  561 Feb  4  2011 pppd-dns
+lrwxrwxrwx   1 root root   21 Dec 12  2011 procps -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr 12  2012 qemu-kvm -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root 8635 Apr 14  2012 rc
+-rwxr-xr-x   1 root root  801 Apr 14  2012 rc.local
+-rwxr-xr-x   1 root root  117 Apr 14  2012 rcS
+-rw-r--r--   1 root root 2427 Apr 14  2012 README
+-rwxr-xr-x   1 root root  639 Apr 14  2012 reboot
+lrwxrwxrwx   1 root root   21 Mar 29  2012 resolvconf -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root 4395 Nov  8  2011 rsync
+lrwxrwxrwx   1 root root   21 Mar 30  2012 rsyslog -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Jun  6  2011 screen-cleanup -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root 4321 Apr 14  2012 sendsigs
+lrwxrwxrwx   1 root root   21 Apr 19  2012 setvtrgb -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root  590 Apr 14  2012 single
+-rw-r--r--   1 root root 4304 Apr 14  2012 skeleton
+lrwxrwxrwx   1 root root   21 Apr 12  2012 smbd -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root 4371 Apr  2  2012 ssh
+-rwxr-xr-x   1 root root  567 Apr 14  2012 stop-bootlogd
+-rwxr-xr-x   1 root root 1143 Apr 14  2012 stop-bootlogd-single
+-rwxr-xr-x   1 root root  700 Oct 26  2011 sudo
+-rwxr-xr-x   1 root root 7929 Mar 16  2012 tomcat6
+lrwxrwxrwx   1 root root   21 Apr  5  2012 udev -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr  5  2012 udev-fallback-graphics -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr  5  2012 udev-finish -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr  5  2012 udevmonitor -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr  5  2012 udevtrigger -> /lib/init/upstart-job
+lrwxrwxrwx   1 root root   21 Apr  5  2012 ufw -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root 2800 Apr 14  2012 umountfs
+-rwxr-xr-x   1 root root 2211 Apr 14  2012 umountnfs.sh
+-rwxr-xr-x   1 root root 2926 Apr 14  2012 umountroot
+-rwxr-xr-x   1 root root 1985 Apr 14  2012 urandom
+lrwxrwxrwx   1 root root   21 Apr 18  2012 whoopsie -> /lib/init/upstart-job
+-rwxr-xr-x   1 root root 1342 Nov 12  2011 winbind
+
+
+[00;31m[-] /etc/init/ config file permissions:[00m
+total 308
+drwxr-xr-x   2 root root 4096 Oct 28  2016 .
+drwxr-xr-x 117 root root 4096 Jan 24 08:16 ..
+-rw-r--r--   1 root root  320 Dec  8  2011 acpid.conf
+-rw-r--r--   1 root root 1309 Apr 18  2012 apport.conf
+-rw-r--r--   1 root root  261 Oct 25  2011 atd.conf
+-rw-r--r--   1 root root  541 Oct 17  2011 avahi-daemon.conf
+-rw-r--r--   1 root root  385 Feb  9  2012 cgroup-lite.conf
+-rw-r--r--   1 root root  266 Apr 16  2012 console.conf
+-rw-r--r--   1 root root  509 Dec 21  2010 console-setup.conf
+-rw-r--r--   1 root root 1122 Apr 16  2012 container-detect.conf
+-rw-r--r--   1 root root  356 Apr 16  2012 control-alt-delete.conf
+-rw-r--r--   1 root root  297 Apr  2  2012 cron.conf
+-rw-r--r--   1 root root 1814 Apr 10  2012 cups.conf
+-rw-r--r--   1 root root  510 Jan 10  2012 dbus.conf
+-rw-r--r--   1 root root  273 Mar 30  2012 dmesg.conf
+-rw-r--r--   1 root root 1096 Apr  3  2012 dovecot.conf
+-rw-r--r--   1 root root 1377 Apr 16  2012 failsafe.conf
+-rw-r--r--   1 root root  267 Apr 16  2012 flush-early-job-log.conf
+-rw-r--r--   1 root root 1247 Mar 14  2012 friendly-recovery.conf
+-rw-r--r--   1 root root  317 May 26  2011 hostname.conf
+-rw-r--r--   1 root root  557 Mar 30  2012 hwclock.conf
+-rw-r--r--   1 root root  444 Mar 30  2012 hwclock-save.conf
+-rw-r--r--   1 root root  571 Feb  4  2012 irqbalance.conf
+-rw-r--r--   1 root root 2382 Mar  2  2012 libvirt-bin.conf
+-rw-r--r--   1 root root  367 Mar 18  2011 module-init-tools.conf
+-rw-r--r--   1 root root  943 Apr 12  2012 mountall.conf
+-rw-r--r--   1 root root  349 Apr 12  2012 mountall-net.conf
+-rw-r--r--   1 root root  261 Apr 12  2012 mountall-reboot.conf
+-rw-r--r--   1 root root 1201 Apr 12  2012 mountall-shell.conf
+-rw-r--r--   1 root root  405 Apr 12  2012 mounted-debugfs.conf
+-rw-r--r--   1 root root  550 Apr 12  2012 mounted-dev.conf
+-rw-r--r--   1 root root  480 Apr 12  2012 mounted-proc.conf
+-rw-r--r--   1 root root  610 Apr 12  2012 mounted-run.conf
+-rw-r--r--   1 root root 1890 Apr 12  2012 mounted-tmp.conf
+-rw-r--r--   1 root root  903 Apr 12  2012 mounted-var.conf
+-rw-r--r--   1 root root 1108 Feb 19  2012 mysql.conf
+-rw-r--r--   1 root root  388 Apr  4  2012 networking.conf
+-rw-r--r--   1 root root  803 Apr  4  2012 network-interface.conf
+-rw-r--r--   1 root root  523 Apr  4  2012 network-interface-container.conf
+-rw-r--r--   1 root root 1603 Apr  4  2012 network-interface-security.conf
+-rw-r--r--   1 root root  475 Mar 19  2012 nmbd.conf
+-rw-r--r--   1 root root  971 Nov  9  2011 plymouth.conf
+-rw-r--r--   1 root root  326 Mar 26  2010 plymouth-log.conf
+-rw-r--r--   1 root root  899 Mar 18  2011 plymouth-splash.conf
+-rw-r--r--   1 root root  800 Apr 13  2012 plymouth-stop.conf
+-rw-r--r--   1 root root  367 Jan 25  2011 plymouth-upstart-bridge.conf
+-rw-r--r--   1 root root  363 Dec  5  2011 procps.conf
+-rw-r--r--   1 root root 1276 Apr 12  2012 qemu-kvm.conf
+-rw-r--r--   1 root root  454 Apr 16  2012 rc.conf
+-rw-r--r--   1 root root  705 Apr 16  2012 rcS.conf
+-rw-r--r--   1 root root 1543 Apr 16  2012 rc-sysinit.conf
+-rw-r--r--   1 root root  457 Mar 29  2012 resolvconf.conf
+-rw-r--r--   1 root root  426 Mar 30  2012 rsyslog.conf
+-rw-r--r--   1 root root  683 Jun  6  2011 screen-cleanup.conf
+-rw-r--r--   1 root root  230 Mar 18  2011 setvtrgb.conf
+-rw-r--r--   1 root root  277 Apr 16  2012 shutdown.conf
+-rw-r--r--   1 root root  387 Mar 19  2012 smbd.conf
+-rw-r--r--   1 root root  667 Feb  6  2012 ssh.conf
+-rw-r--r--   1 root root  348 Apr 16  2012 tty1.conf
+-rw-r--r--   1 root root  333 Apr 16  2012 tty2.conf
+-rw-r--r--   1 root root  333 Apr 16  2012 tty3.conf
+-rw-r--r--   1 root root  333 Apr 16  2012 tty4.conf
+-rw-r--r--   1 root root  232 Apr 16  2012 tty5.conf
+-rw-r--r--   1 root root  232 Apr 16  2012 tty6.conf
+-rw-r--r--   1 root root  322 Dec 16  2011 udev.conf
+-rw-r--r--   1 root root  637 Apr  4  2012 udev-fallback-graphics.conf
+-rw-r--r--   1 root root  769 Aug 22  2011 udev-finish.conf
+-rw-r--r--   1 root root  356 Sep 29  2011 udevmonitor.conf
+-rw-r--r--   1 root root  352 Apr  4  2012 udevtrigger.conf
+-rw-r--r--   1 root root  473 Apr  5  2012 ufw.conf
+-rw-r--r--   1 root root  329 Apr 16  2012 upstart-socket-bridge.conf
+-rw-r--r--   1 root root  553 Apr 16  2012 upstart-udev-bridge.conf
+-rw-r--r--   1 root root  889 Feb  3  2012 ureadahead.conf
+-rw-r--r--   1 root root  683 Feb  3  2012 ureadahead-other.conf
+-r--r--r--   1 root root  901 Oct 28  2016 vmware-tools.conf
+-rw-r--r--   1 root root 1481 Apr 16  2012 wait-for-state.conf
+-rw-r--r--   1 root root  362 Apr 18  2012 whoopsie.conf
+
+
+[00;31m[-] /lib/systemd/* config file permissions:[00m
+/lib/systemd/:
+total 4.0K
+drwxr-xr-x 9 root root 4.0K Oct  7  2016 system
+
+/lib/systemd/system:
+total 96K
+drwxr-xr-x 2 root root 4.0K Oct  7  2016 basic.target.wants
+drwxr-xr-x 2 root root 4.0K Oct  7  2016 halt.target.wants
+drwxr-xr-x 2 root root 4.0K Oct  7  2016 poweroff.target.wants
+drwxr-xr-x 2 root root 4.0K Oct  7  2016 reboot.target.wants
+drwxr-xr-x 2 root root 4.0K Oct  7  2016 dbus.target.wants
+drwxr-xr-x 2 root root 4.0K Oct  7  2016 multi-user.target.wants
+drwxr-xr-x 2 root root 4.0K Oct  7  2016 sockets.target.wants
+-rw-r--r-- 1 root root  164 Apr  5  2012 udev-control.socket
+-rw-r--r-- 1 root root  177 Apr  5  2012 udev-kernel.socket
+-rw-r--r-- 1 root root  341 Apr  5  2012 udev.service
+-rw-r--r-- 1 root root  752 Apr  5  2012 udev-settle.service
+-rw-r--r-- 1 root root  291 Apr  5  2012 udev-trigger.service
+-rw-r--r-- 1 root root  231 Mar 30  2012 rsyslog.service
+-rw-r--r-- 1 root root  433 Mar 27  2012 accounts-daemon.service
+-rw-r--r-- 1 root root  432 Feb 25  2012 console-kit-daemon.service
+-rw-r--r-- 1 root root  219 Feb 25  2012 console-kit-log-system-restart.service
+-rw-r--r-- 1 root root  201 Feb 25  2012 console-kit-log-system-start.service
+-rw-r--r-- 1 root root  218 Feb 25  2012 console-kit-log-system-stop.service
+-rw-r--r-- 1 root root  419 Feb 22  2012 dbus.service
+-rw-r--r-- 1 root root  106 Feb 22  2012 dbus.socket
+-rw-r--r-- 1 root root  469 Feb 13  2012 colord.service
+-rw-r--r-- 1 root root 1.1K Dec 17  2011 avahi-daemon.service
+-rw-r--r-- 1 root root  874 Dec 17  2011 avahi-daemon.socket
+-rw-r--r-- 1 root root  188 Nov  8  2011 rsync.service
+
+/lib/systemd/system/basic.target.wants:
+total 0
+lrwxrwxrwx 1 root root 15 Apr  5  2012 udev.service -> ../udev.service
+lrwxrwxrwx 1 root root 23 Apr  5  2012 udev-trigger.service -> ../udev-trigger.service
+lrwxrwxrwx 1 root root 39 Feb 25  2012 console-kit-log-system-start.service -> ../console-kit-log-system-start.service
+
+/lib/systemd/system/halt.target.wants:
+total 0
+lrwxrwxrwx 1 root root 38 Feb 25  2012 console-kit-log-system-stop.service -> ../console-kit-log-system-stop.service
+
+/lib/systemd/system/poweroff.target.wants:
+total 0
+lrwxrwxrwx 1 root root 38 Feb 25  2012 console-kit-log-system-stop.service -> ../console-kit-log-system-stop.service
+
+/lib/systemd/system/reboot.target.wants:
+total 0
+lrwxrwxrwx 1 root root 41 Feb 25  2012 console-kit-log-system-restart.service -> ../console-kit-log-system-restart.service
+
+/lib/systemd/system/dbus.target.wants:
+total 0
+lrwxrwxrwx 1 root root 14 Feb 22  2012 dbus.socket -> ../dbus.socket
+
+/lib/systemd/system/multi-user.target.wants:
+total 0
+lrwxrwxrwx 1 root root 15 Feb 22  2012 dbus.service -> ../dbus.service
+
+/lib/systemd/system/sockets.target.wants:
+total 0
+lrwxrwxrwx 1 root root 22 Apr  5  2012 udev-control.socket -> ../udev-control.socket
+lrwxrwxrwx 1 root root 21 Apr  5  2012 udev-kernel.socket -> ../udev-kernel.socket
+lrwxrwxrwx 1 root root 14 Feb 22  2012 dbus.socket -> ../dbus.socket
+
+
+[00;33m### SOFTWARE #############################################[00m
+[00;31m[-] Sudo version:[00m
+Sudo version 1.8.3p1
+
+
+[00;31m[-] MYSQL version:[00m
+mysql  Ver 14.14 Distrib 5.5.22, for debian-linux-gnu (i686) using readline 6.2
+
+
+[00;31m[-] Postgres version:[00m
+psql (PostgreSQL) 9.1.3
+contains support for command-line editing
+
+
+[00;31m[-] Apache version:[00m
+Server version: Apache/2.2.22 (Ubuntu)
+Server built:   Feb 13 2012 01:37:27
+
+
+[00;31m[-] Apache user configuration:[00m
+APACHE_RUN_USER=www-data
+APACHE_RUN_GROUP=www-data
+
+
+[00;31m[-] Installed Apache modules:[00m
+Loaded Modules:
+ core_module (static)
+ log_config_module (static)
+ logio_module (static)
+ mpm_prefork_module (static)
+ http_module (static)
+ so_module (static)
+ alias_module (shared)
+ auth_basic_module (shared)
+ authn_file_module (shared)
+ authz_default_module (shared)
+ authz_groupfile_module (shared)
+ authz_host_module (shared)
+ authz_user_module (shared)
+ autoindex_module (shared)
+ cgi_module (shared)
+ deflate_module (shared)
+ dir_module (shared)
+ env_module (shared)
+ mime_module (shared)
+ negotiation_module (shared)
+ php5_module (shared)
+ reqtimeout_module (shared)
+ setenvif_module (shared)
+ status_module (shared)
+
+
+[00;33m### INTERESTING FILES ####################################[00m
+[00;31m[-] Useful file locations:[00m
+/bin/nc
+/bin/netcat
+/usr/bin/wget
+/usr/bin/curl
+
+
+[00;31m[-] Installed compilers:[00m
+iU  gcc-avr                          1:4.5.3-3                                The GNU C compiler (cross compiler for avr)
+ii  libecj-java                      3.5.1-3                                  Eclipse Java compiler (library)
+
+
+[00;31m[-] Can we read/write sensitive files:[00m
+-rw-r--r-- 1 root root 1745 Oct 24  2016 /etc/passwd
+-rw-r--r-- 1 root root 858 Oct 24  2016 /etc/group
+-rw-r--r-- 1 root root 665 Oct  7  2016 /etc/profile
+-rw-r--r-- 1 root root 1136 Jul 26  2017 /etc/shadow
+
+
+[00;31m[-] SUID files:[00m
+-rwsr-xr-x 1 root root 88760 Mar 30  2012 /bin/mount
+-rwsr-xr-x 1 root root 39116 Nov  8  2011 /bin/ping6
+-rwsr-xr-x 1 root root 31116 Apr  8  2012 /bin/su
+-rwsr-xr-x 1 root root 67720 Mar 30  2012 /bin/umount
+-rwsr-xr-x 1 root root 34740 Nov  8  2011 /bin/ping
+-rwsr-xr-x 1 root root 26252 Mar  2  2012 /bin/fusermount
+-rwsr-xr-x 1 root root 30840 Oct 17  2011 /sbin/mount.cifs
+-rwsr-xr-x 2 root root 65608 Jan 31  2012 /usr/bin/sudo
+-rwsr-sr-x 1 daemon daemon 42800 Oct 25  2011 /usr/bin/at
+-rwsr-xr-x 1 root root 30896 Apr  8  2012 /usr/bin/newgrp
+-rwsr-xr-x 1 root root 31748 Apr  8  2012 /usr/bin/chsh
+-rwsr-xr-x 1 root lpadmin 9768 Apr 10  2012 /usr/bin/lppasswd
+-rwsr-xr-x 1 root root 40292 Apr  8  2012 /usr/bin/chfn
+-rwsr-xr-x 1 root root 18092 Jan  6  2012 /usr/bin/pkexec
+-rwsr-xr-x 1 root root 14012 Nov  8  2011 /usr/bin/traceroute6.iputils
+-rwsr-xr-x 2 root root 65608 Jan 31  2012 /usr/bin/sudoedit
+-rwsr-xr-x 1 root root 41284 Apr  8  2012 /usr/bin/passwd
+-rwsr-xr-x 1 root root 57956 Apr  8  2012 /usr/bin/gpasswd
+-rwsr-xr-x 1 root root 56208 Jul 28  2011 /usr/bin/mtr
+-rwsr-sr-x 1 root mail 75600 Aug  4  2010 /usr/bin/procmail
+-rwsr-xr-x 1 root root 9728 Apr 19  2012 /usr/lib/pt_chown
+-rwsr-xr-- 1 root messagebus 316824 Feb 22  2012 /usr/lib/dbus-1.0/dbus-daemon-launch-helper
+-r-sr-xr-x 1 root root 9532 Oct 28  2016 /usr/lib/vmware-tools/bin32/vmware-user-suid-wrapper
+-r-sr-xr-x 1 root root 14320 Oct 28  2016 /usr/lib/vmware-tools/bin64/vmware-user-suid-wrapper
+-rwsr-xr-x 1 root root 9656 Mar  4  2010 /usr/lib/authbind/helper
+-rwsr-xr-x 1 root root 9760 Jan  6  2012 /usr/lib/policykit-1/polkit-agent-helper-1
+-rwsr-xr-x 1 root root 248056 Apr  2  2012 /usr/lib/openssh/ssh-keysign
+-rwsr-xr-x 1 root root 5564 Dec 13  2011 /usr/lib/eject/dmcrypt-get-device
+-rwsr-sr-x 1 libuuid libuuid 17976 Mar 30  2012 /usr/sbin/uuidd
+-rwsr-xr-- 1 root dip 273272 Feb  4  2011 /usr/sbin/pppd
+
+
+[00;31m[-] SGID files:[00m
+-rwxr-sr-x 1 root shadow 30364 Feb  8  2012 /sbin/unix_chkpwd
+-rwsr-sr-x 1 daemon daemon 42800 Oct 25  2011 /usr/bin/at
+-rwxr-sr-x 1 root mail 13932 Oct 17  2011 /usr/bin/dotlockfile
+-rwxr-sr-x 1 root mlocate 34432 Aug 17  2011 /usr/bin/mlocate
+-rwxr-sr-x 3 root mail 9684 Oct 18  2011 /usr/bin/mail-unlock
+-rwxr-sr-x 1 root shadow 18120 Apr  8  2012 /usr/bin/expiry
+-rwxr-sr-x 1 root utmp 365260 Jun  6  2011 /usr/bin/screen
+-rwxr-sr-x 3 root mail 9684 Oct 18  2011 /usr/bin/mail-touchlock
+-rwxr-sr-x 1 root tty 9728 Mar 31  2012 /usr/bin/bsd-write
+-rwxr-sr-x 3 root mail 9684 Oct 18  2011 /usr/bin/mail-lock
+-rwxr-sr-x 1 root mail 13708 Aug  4  2010 /usr/bin/lockfile
+-rwxr-sr-x 1 root crontab 34776 Apr  2  2012 /usr/bin/crontab
+-rwxr-sr-x 1 root shadow 45284 Apr  8  2012 /usr/bin/chage
+-rwxr-sr-x 1 root ssh 128416 Apr  2  2012 /usr/bin/ssh-agent
+-rwxr-sr-x 1 root mail 9720 Jan 10  2012 /usr/bin/mutt_dotlock
+-rwxr-sr-x 1 root tty 18036 Mar 30  2012 /usr/bin/wall
+-rwsr-sr-x 1 root mail 75600 Aug  4  2010 /usr/bin/procmail
+-r-xr-sr-x 1 root postdrop 13608 Apr 13  2012 /usr/sbin/postqueue
+-rwsr-sr-x 1 libuuid libuuid 17976 Mar 30  2012 /usr/sbin/uuidd
+-r-xr-sr-x 1 root postdrop 13624 Apr 13  2012 /usr/sbin/postdrop
+
+
+[-] Can't search *.conf files as no keyword was entered
+
+[-] Can't search *.php files as no keyword was entered
+
+[-] Can't search *.log files as no keyword was entered
+
+[-] Can't search *.ini files as no keyword was entered
+
+[00;31m[-] All *.conf files in /etc (recursive 1 level):[00m
+-rw-r--r-- 1 root root 1260 May  2  2011 /etc/ucf.conf
+-rw-r--r-- 1 root root 326 Aug 17  2011 /etc/updatedb.conf
+-rw-r--r-- 1 root root 321 Mar 30  2012 /etc/blkid.conf
+-rw-r--r-- 1 root root 350 Oct  7  2016 /etc/popularity-contest.conf
+-rw-r--r-- 1 root root 2083 Dec  5  2011 /etc/sysctl.conf
+-rw-r--r-- 1 root root 15752 Jul 25  2009 /etc/ltrace.conf
+-rw-r--r-- 1 root root 34 Oct  7  2016 /etc/ld.so.conf
+-rw-r--r-- 1 root root 513 Oct  7  2016 /etc/nsswitch.conf
+-rw-r--r-- 1 root root 839 Apr  9  2012 /etc/insserv.conf
+-rw-r--r-- 1 root root 956 Mar 30  2012 /etc/mke2fs.conf
+-rw-r--r-- 1 root root 10333 Feb 21  2012 /etc/sensors3.conf
+-rw-r--r-- 1 root root 6961 Oct  7  2016 /etc/ca-certificates.conf
+-rw-r--r-- 1 root root 1889 Oct 17  2011 /etc/request-key.conf
+-rw-r----- 1 root fuse 216 Oct 18  2011 /etc/fuse.conf
+-rw-r--r-- 1 root root 3343 Apr 19  2012 /etc/gai.conf
+-rw-r--r-- 1 root root 144 Oct  7  2016 /etc/kernel-img.conf
+-rw-r--r-- 1 root root 2969 Mar 15  2012 /etc/debconf.conf
+-rw-r--r-- 1 root root 1263 Mar 30  2012 /etc/rsyslog.conf
+-rw-r--r-- 1 root root 2981 Oct  7  2016 /etc/adduser.conf
+-rw-r--r-- 1 root root 552 Feb  8  2012 /etc/pam.conf
+-rw-r--r-- 1 root root 7649 Oct  7  2016 /etc/pnm2ppa.conf
+-rw-r--r-- 1 root root 604 Oct 19  2011 /etc/deluser.conf
+-rw-r--r-- 1 root root 699 Feb 13  2012 /etc/colord.conf
+-rw-r--r-- 1 root root 599 Oct  4  2011 /etc/logrotate.conf
+-rw-r--r-- 1 root root 4728 Mar 24  2012 /etc/hdparm.conf
+-rw-r--r-- 1 root root 92 Apr 19  2012 /etc/host.conf
+
+
+[00;31m[-] Location and Permissions (if accessible) of .bak file(s):[00m
+-rw------- 1 root root 1745 Oct 24  2016 /var/backups/passwd.bak
+-rw------- 1 root shadow 1200 Nov  6  2016 /var/backups/shadow.bak
+-rw------- 1 root shadow 704 Oct 24  2016 /var/backups/gshadow.bak
+-rw------- 1 root root 858 Oct 24  2016 /var/backups/group.bak
+
+
+[00;31m[-] Any interesting mail in /var/mail:[00m
+total 8
+drwxrwsr-x  2 root mail 4096 Oct  7  2016 .
+drwxr-xr-x 13 root root 4096 Jan 15  2017 ..
+
+
+[00;33m### SCAN COMPLETE ####################################[00m
