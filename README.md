@@ -20,6 +20,7 @@
 
 - [swisskyrepo/PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
 - [frizb/Linux-Privilege-Escalation](https://github.com/frizb/Linux-Privilege-Escalation)
+- [Spawning a TTY Shell](https://netsec.ws/?p=337)
 
 **Tools**
 
