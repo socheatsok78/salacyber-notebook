@@ -23,6 +23,7 @@ Informations
 
 - [linPEAS](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS)
 - [rebootuser/LinEnum](https://github.com/rebootuser/LinEnum)
+- [vanhauser-thc/thc-hydra](https://github.com/vanhauser-thc/thc-hydra)
 
 **Check logs**
 
